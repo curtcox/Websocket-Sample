@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 
+import 'channel.dart';
 import 'homepage.dart';
 
 class MyHomePageState extends State<MyHomePage> {
 
   final TextEditingController _controller = TextEditingController();
-  final WebSocketChannel _channel;
+  final Channel _channel;
 
   MyHomePageState(this._channel);
 
@@ -29,7 +29,7 @@ class MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 24),
             StreamBuilder(
-              stream: _channel.stream,
+              stream: _channel.stream(),
               builder: (context, snapshot) {
                 return Text(snapshot.hasData ? '${snapshot.data}' : '');
               },
@@ -47,13 +47,13 @@ class MyHomePageState extends State<MyHomePage> {
 
   void _sendMessage() {
     if (_controller.text.isNotEmpty) {
-      _channel.sink.add(_controller.text);
+      _channel.sendMessage(_controller.text);
     }
   }
 
   @override
   void dispose() {
-    _channel.sink.close();
+    _channel.close();
     _controller.dispose();
     super.dispose();
   }

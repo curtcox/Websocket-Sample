@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_websocket_example/state.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import 'channel.dart';
+
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
     super.key,
@@ -11,5 +13,5 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => MyHomePageState(WebSocketChannel.connect(Uri.parse('ws://localhost:5601')));
+  State<MyHomePage> createState() => MyHomePageState(Channel(WebSocketChannel.connect(Uri.parse('ws://localhost:5601'))));
 }
