@@ -2,7 +2,7 @@ import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/status.dart' as status;
 
 void main() {
-  final channel = IOWebSocketChannel.connect('ws://localhost:5600');
+  final channel = IOWebSocketChannel.connect('ws://localhost:5601');
   print('Connected to channel ' + channel.toString());
   channel.sink.add('sent');
   channel.stream.listen((message) {
